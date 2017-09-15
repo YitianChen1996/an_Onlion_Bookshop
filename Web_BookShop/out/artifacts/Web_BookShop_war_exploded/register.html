@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="img/yumaoicon.png">
+		<title>注册</title>
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/__zcrMain.css" rel="stylesheet"><!-- 自定义less文件编译之后生成的css文件 -->
+		<link href="css/zcrMain.css" rel="stylesheet"><!-- zcr写CSS的地方 -->
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body id="register-page">
+		<div class="container main">
+        <div class="col-md-6 col-md-offset-3">
+            <h2 class="text-center"> 欢迎注册 </h2>
+            <form id="register-form" action="process_register.jsp" accept-charset="UTF-8">
+                <div class="form-group">
+                    <label for="studentID">学号</label>
+                    <input type="number" class="form-control input" id="studentID" name="studentID" placeholder="必填" required autofocus="autofocus">
+                </div>
+                <div class="form-group">
+                    <label for="username"> 昵称</label>
+                    <input type="text" class="form-control input" id="username" name="username" placeholder="用户名" data-remote="/api/username_check/" data-remote-error="该用户名已被注册！" data-error="请填写用户名" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱地址</label>
+                    <input type="email" class="form-control input" id="email" name="email" placeholder="邮箱地址" data-remote="/api/email_check/" data-remote-error="该邮箱已被注册！" data-error="请填写正确的邮箱地址" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control input" id="password" name="password" data-error="请填写密码" placeholder="密码" data-minlength="6" data-minlength-error="密码不得少于6位" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">确认密码</label>
+                    <input type="password" class="form-control input" id="confirm_password" name="confirm_password"
+                           placeholder="确认密码" data-match="#password" data-match-error="两个密码不一致" data-error="请填写确认密码" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="submitbtn">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery-3.1.0.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+
+        <script>
+
+            var btn=document.getElementById("submitbtn");
+            btn.onclick=function () {
+                var password=document.getElementById("password").value;
+                var confirm_password=document.getElementById("confirm_password").value;
+                if (password!=confirm_password){
+                    alert("输入的密码不一致!");
+                    document.getElementById("password").value="";
+                    document.getElementById("confirm_password").value="";
+                    return false}
+                return true;
+            }
+
+        </script>
+	</body>
+</html>
